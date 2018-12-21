@@ -1,0 +1,15 @@
+{% extends "./layout.njk" %}
+{% block main %}
+<form method="post" action="ask"><a class="govuk-back-link" href="/">Back</a>
+  <h1 class="govuk-heading-xl">Ask a question about GOV.UK PaaS</h1>
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="name">Name</label>
+    <input type="text" class="govuk-input  govuk-input--width-20" id="name" name="name" />
+  </div>
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="question">Question</label>
+    <textarea class="govuk-textarea" id="question" name="question" type="text" rows="5"></textarea>
+  </div>
+  <input type="submit" class="govuk-button" />
+</form>
+{% endblock %}

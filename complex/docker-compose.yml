@@ -1,0 +1,45 @@
+version: '3'
+services:
+  frontend:
+    build: frontend
+    ports:
+    - "3000:3000"
+    environment:
+    - QR_CODE_URL=http://qr-code/api/QR
+    - SELF_URL=http://localhost:3000
+    - QUESTION_LIST_URL=http://question-list:8080
+    - QUESTION_SUBMIT_URL=http://question-submit:9090
+  qr-code:
+    build: qr-code
+  db:
+    image: postgres:11
+    ports:
+    - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: docker
+      POSTGRES_USER: docker
+  db-migrations:
+    image: boxfuse/flyway:5
+    restart: on-failure
+    depends_on:
+    - db
+    volumes:
+    - "./db-migrations:/flyway/sql"
+    command: ["migrate", "-url=jdbc:postgresql://db/", "-user=docker", "-password=docker"]
+  question-list:
+    build: question-list
+    ports:
+    - "8080:8080"
+    depends_on:
+    - db
+    environment:
+    - DB_CONNECTION_STRING=postgres://docker:docker@db:5432/docker?sslmode=disable
+  question-submit:
+    build: question-submit
+    ports:
+    - "9090:9090"
+    depends_on:
+    - db
+    environment:
+    - DB_CONNECTION_STRING=postgres://docker:docker@db:5432/docker?sslmode=disable
+

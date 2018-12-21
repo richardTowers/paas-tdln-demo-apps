@@ -1,0 +1,24 @@
+{% extends "./layout.njk" %}
+{% block main %}
+<h1 class="govuk-heading-xl">Ask a question about GOV.UK PaaS</h1>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <p class="govuk-body">You can use this service to ask questions about GOV.UK PaaS during the January 2019 TDLN presentation.</p>
+    <a class="govuk-button" href="/ask">Ask a question</a>
+  </div>
+  <div class="govuk-grid-column-one-third">
+    <img style="width: 100%; max-width: 300px; display: block; margin-left: auto; margin-right: auto;"
+      src="data:image/png;base64,{{qrCode}}"
+      alt="QR code pointing at {{selfUrl}}"/>
+    <p class="govuk-body"><a href="{{selfUrl}}">{{selfUrl}}</a></p>
+  </div>
+</div>
+<div>
+  <h2 class="govuk-heading-m">Questions</h2>
+  <div id="questions-component-container">{{ questionsComponent | safe }}</div>
+</div>
+<script>window.__INITIAL_STATE__ = {{ serializedQuestionsData | safe }}</script>
+<script src="/node_modules/react/umd/react.development.js"></script>
+<script src="/node_modules/react-dom/umd/react-dom.development.js"></script>
+<script src="/assets/questions-component.js"></script>
+{% endblock %}

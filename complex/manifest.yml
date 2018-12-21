@@ -1,0 +1,9 @@
+---
+applications:
+- name: tdln-frontend
+  path: frontend
+  buildpack: nodejs_buildpack
+  memory: 256M
+  command: node index.js
+  routes:
+  - route: tdln.cloudapps.digital
