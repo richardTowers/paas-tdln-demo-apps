@@ -67,6 +67,10 @@ app.get('/', (req, res) => {
   })
 })
 
+app.get('/architecture', (req, res) => {
+  res.render('./architecture.njk')
+})
+
 app.get('/ask', (req, res) => {
   res.render('./ask.njk')
 })
