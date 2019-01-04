@@ -1,3 +1,4 @@
+---
 kind: pipeline
 name: default
 
@@ -9,3 +10,8 @@ steps:
   - npm install
   - npm test
 
+---
+kind: signature
+hmac: abb98c5a2203e554a79036f5a82f5a8636a38e4456a478cb5dbc5fa8bbab40fe
+
+...
