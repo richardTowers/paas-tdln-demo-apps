@@ -1,6 +1,8 @@
 paas-tdln-demo-apps
 ===================
 
+[![Build Status](https://cloud.drone.io/api/badges/richardTowers/paas-tdln-demo-apps/status.svg)](https://cloud.drone.io/richardTowers/paas-tdln-demo-apps)
+
 This repository contains some demo apps for the presentation GOV.UK PaaS are
 doing at the technology and digital leaders' network meeting in January 2019.
 
