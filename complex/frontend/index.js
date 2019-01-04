@@ -56,6 +56,7 @@ app.get('/', (req, res) => {
     questions = JSON.parse(questionsRaw)
     const rendered = questionsComponent.render({ questions: questions })
     res.render('./home.njk', {
+      page: '/',
       questionsComponent: rendered,
       qrCode: qrCode,
       selfUrl: selfUrl,
@@ -68,11 +69,11 @@ app.get('/', (req, res) => {
 })
 
 app.get('/architecture', (req, res) => {
-  res.render('./architecture.njk')
+  res.render('./architecture.njk', {page: '/architecture'})
 })
 
 app.get('/ask', (req, res) => {
-  res.render('./ask.njk')
+  res.render('./ask.njk', {page: '/ask'})
 })
 
 app.post('/ask', (req, res) => {
