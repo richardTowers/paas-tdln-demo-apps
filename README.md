@@ -33,10 +33,9 @@ Composed of the following services:
 * Frontend (react on the client, node + express on the backend)
 * Architecture diagram as part of the application - "If you're bored of
   listening to me speak and would rather look at some code, tuck in"
-  (java using plantuml? Just serve a png directly?)
 * QR code generator (F#)
 * List questions (golang with server-sent-events to the frontend)
-* Submit a question (haskell in docker - maybe filter with list of dirty, naughty or otherwise bad words just in case anyone is naughty?)
+* Submit a question (haskell in docker)
 * Postgres database as a datastore (realtime using triggers)
 
 People can use this during the presentation to submit questions, which we'll
@@ -62,3 +61,39 @@ Make a simple change, deploy it.
 "Let's say this service ended up getting really popular, and things started to
 fall over. What would we do?" Scale up a service and see what happens :)
 
+
+Checklist for each microservice
+-------------------------------
+
+### Frontend
+
+* [x] Has at least one test, which passes
+* [ ] Binds to port 8080 / the PORT environment variable
+* [x] Runs in docker-compose
+* [ ] Runs in cloud foundry
+* [ ] Can be deployed by drone
+* [ ] Has sensible error handling
+
+### QR Code
+
+* [ ] Has at least one test, which passes
+* [ ] Binds to port 8080
+* [x] Runs in docker-compose
+* [ ] Runs in cloud foundry
+* [ ] Can be deployed by drone
+
+### Question submit
+
+* [ ] Has at least one test, which passes
+* [ ] Binds to port 8080
+* [x] Runs in docker-compose
+* [ ] Runs in cloud foundry
+* [ ] Can be deployed by drone
+
+### Question list
+
+* [ ] Has at least one test, which passes
+* [ ] Binds to port 8080
+* [x] Runs in docker-compose
+* [ ] Runs in cloud foundry
+* [ ] Can be deployed by drone
