@@ -8,6 +8,7 @@ const serializeJavaScript = require('serialize-javascript')
 const app = express()
 
 nunjucks.configure('views', {
+  noCache: true,
   autoescape: true,
   express: app
 });
