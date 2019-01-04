@@ -1,0 +1,11 @@
+kind: pipeline
+name: default
+
+steps:
+- name: frontend
+  image: node:lts-alpine
+  commands:
+  - cd complex/frontend
+  - npm install
+  - npm test
+
