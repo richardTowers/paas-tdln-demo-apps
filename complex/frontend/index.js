@@ -78,10 +78,14 @@ app.get('/ask', (req, res) => {
 })
 
 app.post('/ask', (req, res) => {
-  // TODO: validate input parameters
   const question = {
     name: req.body.name,
     question: req.body.question,
+  }
+  if (!question.name     || question.name.length     > 100 ||
+      !question.question || question.question.length > 240) {
+    res.render('./ask.njk', {page: '/ask', error: 'oof, validation'})
+    return
   }
   request
     .post(questionSubmitUrl, {body: question, json: true})
