@@ -27,10 +27,11 @@ steps:
   image: haskell:8
   commands:
   - cd complex/question-submit
+  - cabal update
   - cabal build
 
 ---
 kind: signature
-hmac: c2a2e37d3538f3e9cb178536eb092b81c74ac8a280a13621a5ba2e5a7bc59546
+hmac: bdf7ebbf957bddd49ead63973b9ced38a345824b8ba16a0330a90b78c19f7731
 
 ...
