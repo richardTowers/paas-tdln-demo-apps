@@ -16,9 +16,15 @@ steps:
   commands:
   - cd complex/qr-code
   - dotnet test QrCodeTests
+- name: question-list
+  group: test
+  image: golang:1.11
+  commands:
+  - cd complex/question-list
+  - go test
 
 ---
 kind: signature
-hmac: a73fd68f006c26f7a14c07f46a8df6ba1666c0c93616e4b54f90d3b08eaa8b5f
+hmac: 40750fc4a688a35fcd91115440e57c4f7427a1fead028d9a4449f3aaafdcbd73
 
 ...
