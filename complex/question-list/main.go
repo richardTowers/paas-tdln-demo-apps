@@ -11,46 +11,55 @@ import (
 	_ "github.com/lib/pq"
 )
 
-type questionRow struct {
+type QuestionListGetter = func(w http.ResponseWriter) []QuestionRow
+
+type QuestionRow struct {
 	Id       int64  `json:"id"`
 	Question string `json:"question"`
 	Name     string `json:"name"`
 }
 
-type server struct {
-	databaseConnectionString string
+type Server struct {
+	MakeQuestionsListQuery QuestionListGetter
 }
 
-func (s *server) handler(w http.ResponseWriter, r *http.Request) {
-	resultRows := []questionRow{}
-	db, err := sql.Open("postgres", s.databaseConnectionString)
-	if err != nil {
-		handleError(w, "couldn't connect to database", err)
-		return
-	}
-	defer db.Close()
-
-	rows, err := db.Query("select id, name, question from questions")
-	if err != nil {
-		handleError(w, "couldn't read from database", err)
-		return
-	}
-	for rows.Next() {
-		var row questionRow
-		err := rows.Scan(&row.Id, &row.Name, &row.Question)
-		if err != nil {
-			handleError(w, "couldn't read database row into object", err)
-			return
-		} else {
-			resultRows = append(resultRows, row)
-		}
-	}
+func (s *Server) QuestionListHandler(w http.ResponseWriter, r *http.Request) {
+	resultRows := s.MakeQuestionsListQuery(w)
 	result, err := json.Marshal(resultRows)
 	if err != nil {
 		handleError(w, "couldn't generate JSON from database resultRows", err)
 		return
 	}
 	w.Write(result)
+}
+
+func makeQuestionsListQuery(databaseConnectionString string) QuestionListGetter {
+	return func(w http.ResponseWriter) []QuestionRow {
+		db, err := sql.Open("postgres", databaseConnectionString)
+		if err != nil {
+			handleError(w, "couldn't connect to database", err)
+			return nil
+		}
+		defer db.Close()
+
+		resultRows := []QuestionRow{}
+		rows, err := db.Query("select id, name, question from questions")
+		if err != nil {
+			handleError(w, "couldn't read from database", err)
+			return nil
+		}
+		for rows.Next() {
+			var row QuestionRow
+			err := rows.Scan(&row.Id, &row.Name, &row.Question)
+			if err != nil {
+				handleError(w, "couldn't read database row into object", err)
+				return nil
+			} else {
+				resultRows = append(resultRows, row)
+			}
+		}
+		return resultRows
+	}
 }
 
 func handleError(w http.ResponseWriter, message string, err error) {
@@ -64,9 +73,9 @@ func main() {
 	if !ok {
 		log.Fatal("DB_CONNECTION_STRING must be set")
 	}
-	s := server{
-		databaseConnectionString: databaseConnectionString,
+	s := Server{
+		MakeQuestionsListQuery: makeQuestionsListQuery(databaseConnectionString),
 	}
-	http.HandleFunc("/", s.handler)
+	http.HandleFunc("/", s.QuestionListHandler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
