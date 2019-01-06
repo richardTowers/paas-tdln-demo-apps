@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use('/assets', express.static('assets'))
 app.use('/node_modules/react/umd', express.static('node_modules/react/umd'))
 app.use('/node_modules/react-dom/umd', express.static('node_modules/react-dom/umd'))
-app.use('/node_modules/react-router-dom/umd', express.static('node_modules/react-router-dom/umd'))
+app.use('/node_modules/govuk-frontend', express.static('node_modules/govuk-frontend'))
 
 app.get('/question-stream', (req, res) => {
   req.socket.setTimeout(10 * 60 * 1000)

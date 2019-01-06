@@ -10,12 +10,17 @@
     {% endif %}
     <input type="text" class="govuk-input  govuk-input--width-20" id="name" name="name" value="{{values.name}}"/>
   </div>
-  <div class="govuk-form-group{{' govuk-form-group--error' if errors and errors.question else ''}}">
-    <label class="govuk-label" for="question">Question</label>
-    {% if errors and errors.question %}
-    <div class="govuk-error-message">{{errors.question}}</div>
-    {% endif %}
-    <textarea class="govuk-textarea" id="question" name="question" type="text" rows="5">{{values.question}}</textarea>
+  <div class="govuk-character-count" data-module="character-count" data-maxlength="500">
+    <div class="govuk-form-group{{' govuk-form-group--error' if errors and errors.question else ''}}">
+      <label class="govuk-label" for="question">Question</label>
+      {% if errors and errors.question %}
+      <div class="govuk-error-message">{{errors.question}}</div>
+      {% endif %}
+      <textarea class="govuk-textarea js-character-count" id="question" name="question" type="text" rows="5">{{values.question}}</textarea>
+      <span id="question-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
+        You can enter up to 500 characters
+      </span>
+    </div>
   </div>
   <input type="submit" class="govuk-button" />
 </form>
