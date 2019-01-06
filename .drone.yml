@@ -22,9 +22,15 @@ steps:
   commands:
   - cd complex/question-list
   - go test -mod=vendor
+- name: question-submit
+  group: test
+  image: haskell:8
+  commands:
+  - cd complex/question-submit
+  - cabal build
 
 ---
 kind: signature
-hmac: ce8e3282cbff6b6584a96ac21210ecf33662cf6a318d2d510bd8309071be6954
+hmac: c2a2e37d3538f3e9cb178536eb092b81c74ac8a280a13621a5ba2e5a7bc59546
 
 ...
