@@ -51,8 +51,8 @@ data: ${JSON.stringify(questions)}
 
 app.get('/', (req, res) => {
   Promise.all([
-    request({url: qrCodeUrl, qs: {url: selfUrl}}).catch(err => 'some-qr-code'),
-    request({url: questionListUrl}).catch(err => console.error(err), []),
+    request({url: qrCodeUrl, qs: {url: selfUrl}}).catch(() => null),
+    request({url: questionListUrl}).catch(err => (console.error(err), '[]')),
   ]).then(([qrCode, questionsRaw]) => {
     questions = JSON.parse(questionsRaw)
     const rendered = questionsComponent.render({ questions: questions })
@@ -65,7 +65,7 @@ app.get('/', (req, res) => {
     })
   }).catch(err => {
     console.error('error', err)
-    res.send('error')
+    res.render('./error.njk')
   })
 })
 
@@ -109,12 +109,10 @@ app.post('/ask', (req, res) => {
   }
   request
     .post(questionSubmitUrl, {body: question, json: true})
-    .then(() => {
-      res.redirect('/')
-    })
+    .then(() => res.redirect('/'))
     .catch(err => {
       console.error('error', err)
-      res.send('error')
+      res.render('./error.njk')
     })
 })
 

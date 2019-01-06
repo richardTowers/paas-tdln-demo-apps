@@ -7,9 +7,11 @@
     <a class="govuk-button" href="/ask">Ask a question</a>
   </div>
   <div class="govuk-grid-column-one-third">
+    {% if qrCode %}
     <img style="width: 100%; max-width: 300px; display: block; margin-left: auto; margin-right: auto;"
       src="data:image/png;base64,{{qrCode}}"
       alt="QR code pointing at {{selfUrl}}"/>
+    {% endif %}
     <p class="govuk-body"><a href="{{selfUrl}}">{{selfUrl}}</a></p>
   </div>
 </div>

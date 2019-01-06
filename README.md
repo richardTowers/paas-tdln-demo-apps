@@ -74,7 +74,7 @@ Checklist for each microservice
 * [x] Runs in docker-compose
 * [ ] Runs in cloud foundry
 * [ ] Can be deployed by drone
-* [ ] Has sensible error handling
+* [x] Has sensible error handling
 
 ### QR Code
 
