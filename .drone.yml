@@ -21,10 +21,10 @@ steps:
   image: golang:1.11
   commands:
   - cd complex/question-list
-  - go test
+  - go test -mod=vendor
 
 ---
 kind: signature
-hmac: 40750fc4a688a35fcd91115440e57c4f7427a1fead028d9a4449f3aaafdcbd73
+hmac: ce8e3282cbff6b6584a96ac21210ecf33662cf6a318d2d510bd8309071be6954
 
 ...
