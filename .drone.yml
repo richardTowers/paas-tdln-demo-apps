@@ -4,14 +4,21 @@ name: default
 
 steps:
 - name: frontend
+  group: test
   image: node:lts-alpine
   commands:
   - cd complex/frontend
   - npm install
   - npm test
+- name: qr-code
+  group: test
+  image: microsoft/dotnet:sdk
+  commands:
+  - cd complex/qr-code
+  - dotnet test QrCodeTests
 
 ---
 kind: signature
-hmac: abb98c5a2203e554a79036f5a82f5a8636a38e4456a478cb5dbc5fa8bbab40fe
+hmac: a73fd68f006c26f7a14c07f46a8df6ba1666c0c93616e4b54f90d3b08eaa8b5f
 
 ...

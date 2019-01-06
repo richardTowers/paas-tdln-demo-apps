@@ -78,7 +78,7 @@ Checklist for each microservice
 
 ### QR Code
 
-* [ ] Has at least one test, which passes
+* [x] Has at least one test, which passes
 * [ ] Binds to port 8080
 * [x] Runs in docker-compose
 * [ ] Runs in cloud foundry
