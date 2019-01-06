@@ -20,7 +20,6 @@
         e('tr', {className: 'govuk-table__row'}, [
           e('th', {key: 'name', className: 'govuk-table__header', scope: 'col'}, 'Name'),
           e('th', {key: 'question', className: 'govuk-table__header', scope: 'col'}, 'Question'),
-          e('th', {key: 'votes', className: 'govuk-table__header', scope: 'col'}, 'Votes'),
         ])
       ),
       e('tbody', {key: 'body', className: 'govuk-table__body' },
@@ -28,7 +27,6 @@
           return e('tr', {key: question.id, className: 'govuk-table__row'}, [
             e('td', {key: 'name', className: 'govuk-table__cell'}, question.name),
             e('td', {key: 'question', className: 'govuk-table__cell'}, question.question),
-            e('td', {key: 'votes', className: 'govuk-table__cell'}, question.votes || 0),
           ])
         })
       )
