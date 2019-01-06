@@ -70,7 +70,7 @@ Checklist for each microservice
 ### Frontend
 
 * [x] Has at least one test, which passes
-* [ ] Binds to port 8080 / the PORT environment variable
+* [x] Binds to the PORT environment variable
 * [x] Runs in docker-compose
 * [ ] Runs in cloud foundry
 * [ ] Can be deployed by drone
@@ -79,7 +79,7 @@ Checklist for each microservice
 ### QR Code
 
 * [x] Has at least one test, which passes
-* [ ] Binds to port 8080
+* [ ] Binds to the PORT environment variable
 * [x] Runs in docker-compose
 * [ ] Runs in cloud foundry
 * [ ] Can be deployed by drone
@@ -87,7 +87,7 @@ Checklist for each microservice
 ### Question submit
 
 * [ ] Has at least one test, which passes
-* [ ] Binds to port 8080
+* [x] Binds to the PORT environment variable
 * [x] Runs in docker-compose
 * [ ] Runs in cloud foundry
 * [ ] Can be deployed by drone
@@ -95,7 +95,7 @@ Checklist for each microservice
 ### Question list
 
 * [x] Has at least one test, which passes
-* [ ] Binds to port 8080
+* [ ] Binds to the PORT environment variable
 * [x] Runs in docker-compose
 * [ ] Runs in cloud foundry
 * [ ] Can be deployed by drone

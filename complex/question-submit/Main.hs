@@ -16,8 +16,10 @@ instance FromJSON Question
 
 main :: IO ()
 main = do
+    portString <- getEnv "PORT"
     dbConnectionString <- getEnv "DB_CONNECTION_STRING"
-    scotty 9090 $ app $ pack dbConnectionString
+    let port = read portString :: Int
+    scotty port $ app $ pack dbConnectionString
 
 insertQuestion :: ByteString -> Question -> IO ()
 insertQuestion dbConnectionString q = do
@@ -31,3 +33,4 @@ app dbConnectionString = post "/" $ do
   ques <- jsonData :: ActionM Question
   liftIO $ insertQuestion dbConnectionString ques
   status $ mkStatus 201 "Created"
+

@@ -9,15 +9,18 @@ services:
     - SELF_URL=http://localhost:3000
     - QUESTION_LIST_URL=http://question-list:8080
     - QUESTION_SUBMIT_URL=http://question-submit:9090
+    - PORT=3000
   qr-code:
     build: qr-code
+    environment:
+    - PORT=80
   db:
     image: postgres:11
     ports:
     - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: docker
-      POSTGRES_USER: docker
+    - POSTGRES_PASSWORD=docker
+    - POSTGRES_USER=docker
   db-migrations:
     image: boxfuse/flyway:5
     restart: on-failure
@@ -34,6 +37,7 @@ services:
     - db
     environment:
     - DB_CONNECTION_STRING=postgres://docker:docker@db:5432/docker?sslmode=disable
+    - PORT=8080
   question-submit:
     build: question-submit
     ports:
@@ -42,4 +46,5 @@ services:
     - db
     environment:
     - DB_CONNECTION_STRING=postgres://docker:docker@db:5432/docker?sslmode=disable
+    - PORT=9090
 
