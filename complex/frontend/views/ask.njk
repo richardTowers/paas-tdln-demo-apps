@@ -3,13 +3,19 @@
 <a class="govuk-back-link" href="/">Back</a>
 <form method="post" action="ask">
   <h1 class="govuk-heading-xl">Ask a question about GOV.UK PaaS</h1>
-  <div class="govuk-form-group">
+  <div class="govuk-form-group{{' govuk-form-group--error' if errors and errors.name else ''}}">
     <label class="govuk-label" for="name">Name</label>
-    <input type="text" class="govuk-input  govuk-input--width-20" id="name" name="name" />
+    {% if errors and errors.name %}
+    <div class="govuk-error-message">{{errors.name}}</div>
+    {% endif %}
+    <input type="text" class="govuk-input  govuk-input--width-20" id="name" name="name" value="{{values.name}}"/>
   </div>
-  <div class="govuk-form-group">
+  <div class="govuk-form-group{{' govuk-form-group--error' if errors and errors.question else ''}}">
     <label class="govuk-label" for="question">Question</label>
-    <textarea class="govuk-textarea" id="question" name="question" type="text" rows="5"></textarea>
+    {% if errors and errors.question %}
+    <div class="govuk-error-message">{{errors.question}}</div>
+    {% endif %}
+    <textarea class="govuk-textarea" id="question" name="question" type="text" rows="5">{{values.question}}</textarea>
   </div>
   <input type="submit" class="govuk-button" />
 </form>

@@ -74,17 +74,37 @@ app.get('/architecture', (req, res) => {
 })
 
 app.get('/ask', (req, res) => {
-  res.render('./ask.njk', {page: '/ask'})
+  res.render('./ask.njk', {page: '/ask', values: {}})
 })
 
+function runValidations(model, validations) {
+  const errors = {}
+
+  for (const validation of validations) {
+    if (!validation.validation(model[validation.field])) {
+      errors[validation.field] = validation.message
+    }
+  }
+
+  if (Object.keys(errors).length) {
+    return errors
+  }
+
+  return null
+}
+
 app.post('/ask', (req, res) => {
+  const validations = [
+    {field: 'name'    , validation: n => n && n.length > 3  && n.length <= 100, message: 'Name should be between 3 and 100 characters'},
+    {field: 'question', validation: q => q && q.length > 20 && q.length <= 500, message: 'Question should be between 20 and 500 characters'},
+  ]
   const question = {
     name: req.body.name,
     question: req.body.question,
   }
-  if (!question.name     || question.name.length     > 100 ||
-      !question.question || question.question.length > 240) {
-    res.render('./ask.njk', {page: '/ask', error: 'oof, validation'})
+  const errors = runValidations(question, validations)
+  if (errors) {
+    res.render('./ask.njk', {page: '/ask', errors: errors, values: question})
     return
   }
   request
