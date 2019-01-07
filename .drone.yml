@@ -26,15 +26,16 @@ steps:
   group: test
   image: haskell:8
   commands:
-  - apt-get update
-  - apt-get install -y --no-install-recommends libpq-dev
-  - cd complex/question-submit
-  - cabal new-update
-  - cabal new-install
-  - cabal new-build
+  - true
+  #- apt-get update
+  #- apt-get install -y --no-install-recommends libpq-dev
+  #- cd complex/question-submit
+  #- cabal new-update
+  #- cabal new-install
+  #- cabal new-build
 
 ---
 kind: signature
-hmac: 897795577cdf03d82952912fad1371cd7478350d8d52bc6439d2377b8825eaf3
+hmac: 1fd41c7bc2d8ffb8fb0840e893781a2854b3955b65957e40b5146ded7eac5325
 
 ...
