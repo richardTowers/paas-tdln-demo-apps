@@ -23,6 +23,8 @@ steps:
   image: haskell:8
   commands:
   - true
+  depends_on:
+    - frontend
   #- apt-get update
   #- apt-get install -y --no-install-recommends libpq-dev
   #- cd complex/question-submit
@@ -41,6 +43,6 @@ steps:
 
 ---
 kind: signature
-hmac: 7831e8eb1b974508ac71945b75013ebe8dc5157d9680a34fc9e7a276babc52bd
+hmac: 4d0b26a08ef5c68b25c6875e5fe3d7177e21259d7c7ca8f7c3fd07c4cdcd3a78
 
 ...
