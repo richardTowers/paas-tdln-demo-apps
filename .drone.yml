@@ -4,26 +4,22 @@ name: default
 
 steps:
 - name: frontend
-  group: test
   image: node:lts-alpine
   commands:
   - cd complex/frontend
   - npm install
   - npm test
 - name: qr-code
-  group: test
   image: microsoft/dotnet:sdk
   commands:
   - cd complex/qr-code
   - dotnet test QrCodeTests
 - name: question-list
-  group: test
   image: golang:1.11
   commands:
   - cd complex/question-list
   - go test -mod=vendor
 - name: question-submit
-  group: test
   image: haskell:8
   commands:
   - true
@@ -33,9 +29,18 @@ steps:
   #- cabal new-update
   #- cabal new-install
   #- cabal new-build
+- name: deploy
+  image: alpine:latest
+  depends_on:
+    - frontend
+    - qr-code
+    - question-list
+    - question-submit
+  commands:
+    - true
 
 ---
 kind: signature
-hmac: 1fd41c7bc2d8ffb8fb0840e893781a2854b3955b65957e40b5146ded7eac5325
+hmac: 7831e8eb1b974508ac71945b75013ebe8dc5157d9680a34fc9e7a276babc52bd
 
 ...
