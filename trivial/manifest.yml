@@ -1,0 +1,5 @@
+---
+applications:
+- name: tdln-demo
+  buildpack: staticfile_buildpack
+
