@@ -1,9 +1,48 @@
 ---
 applications:
+
 - name: tdln-frontend
   path: frontend
-  buildpack: nodejs_buildpack
+  buildpacks:
+  - nodejs_buildpack
   memory: 256M
   command: node index.js
   routes:
-  - route: tdln.cloudapps.digital
+  - route: tdln.london.cloudapps.digital
+  env:
+    SELF_URL: https://tdln.london.cloudapps.digital
+    QR_CODE_URL: http://tdln-qr-code.apps.internal:8080/api/QR
+    QUESTION_LIST_URL: http://tdln-question-list.apps.internal:8080
+    QUESTION_SUBMIT_URL: http://tdln-question-submit.apps.internal:8080
+
+- name: tdln-question-list
+  path: question-list
+  buildpacks:
+  - go_buildpack
+  memory: 256M
+  routes:
+  - route: tdln-question-list.apps.internal
+  services:
+  - tdln-db
+  env:
+    GO111MODULE: "on"
+    GOPACKAGENAME: tdln-question-list
+    GOVERSION: go1.11.1
+
+- name: tdln-question-submit
+  docker:
+    image: richardtowers/tdln-question-submit
+  memory: 256M
+  routes:
+  - route: tdln-question-submit.apps.internal
+  services:
+  - tdln-db
+
+- name: tdln-qr-code
+  path: qr-code
+  buildpacks:
+  - https://github.com/cloudfoundry/dotnet-core-buildpack.git
+  memory: 256M
+  routes:
+  - route: tdln-qr-code.apps.internal
+
