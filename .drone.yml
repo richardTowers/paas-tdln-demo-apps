@@ -45,11 +45,12 @@ steps:
     CF_PASSWORD:
       from_secret: PAAS_PASSWORD
   commands:
-  - cd complex/
-  - cf api https://api.london.cloud.service.gov.uk
-  - cf auth
-  - cf target -o govuk-paas -s tdln
-  - cf push tdln-frontend
+  - true
+  - # cd complex/
+  - # cf api https://api.london.cloud.service.gov.uk
+  - # cf auth
+  - # cf target -o govuk-paas -s tdln
+  - # cf push tdln-frontend
 
 - name: qr-code
   image: governmentpaas/cf-cli
@@ -59,11 +60,12 @@ steps:
     CF_PASSWORD:
       from_secret: PAAS_PASSWORD
   commands:
-  - cd complex/
-  - cf api https://api.london.cloud.service.gov.uk
-  - cf auth
-  - cf target -o govuk-paas -s tdln
-  - cf push tdln-qr-code
+  - true
+  - # cd complex/
+  - # cf api https://api.london.cloud.service.gov.uk
+  - # cf auth
+  - # cf target -o govuk-paas -s tdln
+  - # cf push tdln-qr-code
 
 - name: question-list
   image: governmentpaas/cf-cli
@@ -73,11 +75,12 @@ steps:
     CF_PASSWORD:
       from_secret: PAAS_PASSWORD
   commands:
-  - cd complex/
-  - cf api https://api.london.cloud.service.gov.uk
-  - cf auth
-  - cf target -o govuk-paas -s tdln
-  - cf push tdln-question-list
+  - true
+  - # cd complex/
+  - # cf api https://api.london.cloud.service.gov.uk
+  - # cf auth
+  - # cf target -o govuk-paas -s tdln
+  - # cf push tdln-question-list
 
 - name: question-submit
   image: governmentpaas/cf-cli
@@ -96,6 +99,6 @@ steps:
 
 ---
 kind: signature
-hmac: 67b246b27c8a47a37786a242ced220702b6ef82de3769a0de83733ec9995265f
+hmac: 1fd7cb313e25483a13da8c11a094c94bed42fbc39882296e0270720a581dbb01
 
 ...
