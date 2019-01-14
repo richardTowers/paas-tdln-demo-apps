@@ -1,48 +1,61 @@
 ---
 kind: pipeline
-name: default
+name: test
 
 steps:
+
 - name: frontend
   image: node:lts-alpine
   commands:
   - cd complex/frontend
   - npm install
   - npm test
+
 - name: qr-code
   image: microsoft/dotnet:sdk
   commands:
   - cd complex/qr-code
   - dotnet test QrCodeTests
+
 - name: question-list
   image: golang:1.11
   commands:
   - cd complex/question-list
   - go test -mod=vendor
+
 - name: question-submit
   image: haskell:8
   commands:
   - true
-  depends_on:
-    - frontend
-  #- apt-get update
-  #- apt-get install -y --no-install-recommends libpq-dev
-  #- cd complex/question-submit
-  #- cabal new-update
-  #- cabal new-install
-  #- cabal new-build
-- name: deploy
-  image: alpine:latest
-  depends_on:
-    - frontend
-    - qr-code
-    - question-list
-    - question-submit
+
+---
+kind: pipeline
+name: deploy
+
+steps:
+- name: frontend
+  image: governmentpaas/cf-cli
   commands:
-    - true
+  - cd complex/
+  - cf push tdln-frontend
+- name: qr-code
+  image: governmentpaas/cf-cli
+  commands:
+  - cd complex/
+  - cf push tdln-qr-code
+- name: question-list
+  image: governmentpaas/cf-cli
+  commands:
+  - cd complex/
+  - cf push tdln-question-list
+- name: question-submit
+  image: governmentpaas/cf-cli
+  commands:
+  - cd complex/
+  - cf push tdln-question-list
 
 ---
 kind: signature
-hmac: 4d0b26a08ef5c68b25c6875e5fe3d7177e21259d7c7ca8f7c3fd07c4cdcd3a78
+hmac: 08130b5148a7c2b85e46e2ff66df0fa4ec8eb2bae8f2d48bced76b86467561d7
 
 ...
