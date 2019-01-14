@@ -36,8 +36,15 @@ depends_on: [test]
 steps:
 - name: frontend
   image: governmentpaas/cf-cli
+  environment:
+    CF_USERNAME:
+      from_secret: PAAS_USERNAME
+    CF_PASSWORD:
+      from_secret: PAAS_PASSWORD
   commands:
   - cd complex/
+  - cf auth
+  - cf target -o govuk-paas -s tdln
   - cf push tdln-frontend
 - name: qr-code
   image: governmentpaas/cf-cli
@@ -57,6 +64,6 @@ steps:
 
 ---
 kind: signature
-hmac: 2e3f04d07bc6ca5cd181d2f253acb81604a3a45b13aabcce24ee5484942d8790
+hmac: 2fc344b9853cf0947a7dd8d8f86b034af53d131bef9fc71936c2949fcabb9a39
 
 ...
