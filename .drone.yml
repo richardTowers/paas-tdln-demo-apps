@@ -31,6 +31,7 @@ steps:
 ---
 kind: pipeline
 name: deploy
+depends_on: [test]
 
 steps:
 - name: frontend
@@ -56,6 +57,6 @@ steps:
 
 ---
 kind: signature
-hmac: 08130b5148a7c2b85e46e2ff66df0fa4ec8eb2bae8f2d48bced76b86467561d7
+hmac: 2e3f04d07bc6ca5cd181d2f253acb81604a3a45b13aabcce24ee5484942d8790
 
 ...
