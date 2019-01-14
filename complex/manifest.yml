@@ -17,6 +17,7 @@ applications:
 
 - name: tdln-question-list
   path: question-list
+  instances: 3
   buildpacks:
   - go_buildpack
   memory: 256M
@@ -30,6 +31,7 @@ applications:
     GOVERSION: go1.11.1
 
 - name: tdln-question-submit
+  instances: 3
   docker:
     image: richardtowers/tdln-question-submit
   memory: 256M
@@ -40,6 +42,7 @@ applications:
 
 - name: tdln-qr-code
   path: qr-code
+  instances: 3
   buildpacks:
   - https://github.com/cloudfoundry/dotnet-core-buildpack.git
   memory: 256M
