@@ -96,7 +96,7 @@ function runValidations(model, validations) {
 app.post('/ask', (req, res) => {
   const validations = [
     {field: 'name'    , validation: n => n && n.length > 3  && n.length <= 100, message: 'Name should be between 3 and 100 characters'},
-    {field: 'question', validation: q => q && q.length > 20 && q.length <= 500, message: 'Question should be between 20 and 500 characters'},
+    {field: 'question', validation: q => q && q.length > 5 && q.length <= 500, message: 'Question should be between 5 and 500 characters'},
   ]
   const question = {
     name: req.body.name,
