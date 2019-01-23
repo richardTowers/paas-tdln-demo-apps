@@ -8,9 +8,9 @@ applications:
   memory: 256M
   command: node index.js
   routes:
-  - route: tdln.london.cloudapps.digital
+  - route: delivery-and-support.london.cloudapps.digital
   env:
-    SELF_URL: https://tdln.london.cloudapps.digital
+    SELF_URL: https://delivery-and-support.london.cloudapps.digital
     QR_CODE_URL: http://tdln-qr-code.apps.internal:8080/api/QR
     QUESTION_LIST_URL: http://tdln-question-list.apps.internal:8080
     QUESTION_SUBMIT_URL: http://tdln-question-submit.apps.internal:8080
