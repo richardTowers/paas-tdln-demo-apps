@@ -31,7 +31,7 @@ applications:
     GOVERSION: go1.11.1
 
 - name: tdln-question-submit
-  instances: 1
+  instances: 10
   docker:
     image: richardtowers/tdln-question-submit
   memory: 256M
