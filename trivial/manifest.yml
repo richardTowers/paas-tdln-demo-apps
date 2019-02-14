@@ -1,5 +1,5 @@
 ---
 applications:
-- name: tdln-demo
+- name: pre-tech-call-demo
   buildpack: staticfile_buildpack
 
